@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivational quotes</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    .container{
+        display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #2196F3, #03A9F4);
+
+    }
+
+    .box{
+        background-color: white;
+        font-size: 1.5rem;
+        font-family:"poppins";
+        max-width: 500px;
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 5px 10px 10px rgba(0, 0 , 0, 0.2);
+    }
+    #author{
+        font-size: 0.8rem;
+        color: #b5b0b0;
+        text-align: right;
+    }
+    .btn {
+  padding: 10px 20px;
+  background-color: #2196F3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-5px); /* Move the button up */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Add a shadow to create a 3D effect */
+}
+</style>
+</head>
+<body>
+    <div class="container">
+    <div class="box">
+    <p id="quotes">The only way to do great work is to love what you do.</p>
+    <p id="author"> - Steve Jobs</p>
+    <button class="btn" onclick="getQuotes()">Next>></button>
+</div>
+</div>
+    <script>
+let quotes = document.getElementById("quotes")
+let author=document.getElementById("author")
+const api="https://type.fit/api/quotes";
+
+function getQuotes() {
+    fetch(api)
+    .then((response)=> response.json())
+    .then((data)=>{
+        const RI = Math.floor(Math.random() * data.length)
+        quotes.innerText=data[RI].text
+        author.innerText=`- ${data[RI].author}`
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+    </script>
+</body>
+</html>
